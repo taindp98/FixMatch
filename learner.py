@@ -189,10 +189,10 @@ class FixMatch:
         if self.config.use_ema:
             self.ema_model.ema.load_state_dict(checkpoint['ema_state_dict'])
             if is_train:
-                for parameter in self.ema_model.ema..parameters():
+                for parameter in self.ema_model.ema.parameters():
                     parameter.requires_grad = True
             else:
-                for parameter in self.ema_model.ema..parameters():
+                for parameter in self.ema_model.ema.parameters():
                     parameter.requires_grad = False
 
         self.optimizer.load_state_dict(checkpoint['optimizer'])
