@@ -66,6 +66,8 @@ class FixMatch:
             outputs_x = outputs[:bs_lb]
             outputs_u_w, outputs_u_s = outputs[bs_lb:].chunk(2)
 
+            del outputs
+
             lx = ce_loss(outputs_x, targets_x, reduction = 'mean')
             lu, mask = consistency_loss(outputs_u_w, outputs_u_s, T = self.config.T, p_cutoff = self.config.threshold)
             losses = lx + self.config.lambda_u * lu
